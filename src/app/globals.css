@@ -1,0 +1,104 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-background: #000000;
+  --color-foreground: #ffffff;
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+
+  --color-card-bg: rgba(15, 15, 15, 0.4);
+  --color-accent-neon: #DC2626;
+  --color-border-glass: rgba(255, 255, 255, 0.08);
+
+  /* Dashboard palette */
+  --color-dashboard-bg: #0A0B0F;
+  --color-dashboard-surface: rgba(255, 255, 255, 0.03);
+  --color-dashboard-surface-hover: rgba(255, 255, 255, 0.06);
+  --color-dashboard-border: rgba(255, 255, 255, 0.06);
+  --color-status-safe: #10B981;
+  --color-status-warning: #F59E0B;
+  --color-status-danger: #EF4444;
+  --color-accent-orange: #DC2626;
+  --color-accent-orange-muted: rgba(255, 79, 0, 0.15);
+}
+
+:root {
+  color-scheme: dark;
+}
+
+body {
+  background-color: var(--color-background);
+  color: var(--color-foreground);
+  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+@utility glass {
+  background-color: var(--color-card-bg);
+  backdrop-filter: blur(24px);
+  border: 1px solid var(--color-border-glass);
+}
+
+@utility text-glow {
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+@utility neon-shadow {
+  box-shadow: 0 0 30px rgba(255, 79, 0, 0.2);
+}
+
+@keyframes shimmer {
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes breathing-pulse {
+  0%, 100% { opacity: 0.4; transform: scale(1); }
+  50% { opacity: 0.7; transform: scale(1.05); }
+}
+
+@keyframes fade-in-up {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slide-in-right {
+  from { opacity: 0; transform: translateX(-8px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@utility glass-card {
+  background-color: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(40px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+@utility animate-breathing {
+  animation: breathing-pulse 4s ease-in-out infinite;
+}
+
+@utility animate-fade-in-up {
+  animation: fade-in-up 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Hide Spline Logo — multiple selectors for resilience against Spline SDK updates */
+.hide-spline-logo canvas + div,
+.hide-spline-logo canvas + a,
+.hide-spline-logo > div > div > div > a[href*="spline"] {
+  display: none !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+  width: 0 !important;
+  height: 0 !important;
+  overflow: hidden !important;
+}
+
+spline-viewer::part(logo) {
+  display: none !important;
+}
